@@ -9,8 +9,6 @@ def solution(x: np.array, y: np.array) -> bool: # Одна или две выб�
     # Измените код этой функции
     # Это будет вашим решением
     # Не меняйте название функции и её аргументы
-    p_value = permutation_test((x, y), lambda x, y, axis: np.mean(x, axis=axis) - np.mean(y, axis=axis),
-                                            vectorized=True,
-                                            n_resamples=5000).pvalue
+     _, p_value = ttest_ind(x, y, equal_var=False, permutations=5000, alternative='less')
     alpha = 0.07
-    return p_value < alpha # Ваш ответ, True или False
+    return p_value < alpha
